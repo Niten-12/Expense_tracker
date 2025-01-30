@@ -1,0 +1,105 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Name Field -->
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerForm.get('name')?.invalid && registerForm.get('name')?.touched
+        "
+        class="error"
+      >
+        Full Name is required.
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerForm.get('email')?.invalid &&
+          registerForm.get('email')?.touched
+        "
+        class="error"
+      >
+        Please enter a valid email.
+      </div>
+      <div
+        *ngIf="
+          registerForm.get('email')?.hasError('invalidEmail') &&
+          registerForm.get('email')?.touched
+        "
+        class="error"
+      >
+        Email format is invalid.
+      </div>
+    </div>
+
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerForm.get('password')?.invalid &&
+          registerForm.get('password')?.touched
+        "
+        class="error"
+      >
+        Password is required.
+      </div>
+    </div>
+
+    <!-- Confirm Password Field -->
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          !isConfirmPasswordValid() &&
+          registerForm.get('confirmPassword')?.touched
+        "
+        class="error"
+      >
+        Passwords don't match.
+      </div>
+    </div>
+
+    <!-- Register Button -->
+    <button
+      type="submit"
+      [disabled]="registerForm.invalid || !isConfirmPasswordValid()"
+      class="btn btn-primary"
+    >
+      Register
+    </button>
+  </form>
+
+  <div class="additional-links">
+    <a href="/login" class="login-link">Already have an account? Login</a>
+  </div>
+</div>

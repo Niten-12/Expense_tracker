@@ -1,0 +1,64 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        #emailInput="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        #passwordInput="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+        Password is required.
+      </div>
+    </div>
+
+    <!-- Error feedback for login failure -->
+    <div *ngIf="loginError" class="error">
+      {{ loginError }}
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="loginForm.invalid"
+      class="btn btn-primary"
+    >
+      Login
+    </button>
+  </form>
+
+  <div class="additional-links">
+    <a
+      href="/forgot-password"
+      class="forgot-password-link"
+      style="color: brown"
+    >
+      Forgot Password?
+    </a>
+    <br />
+    <br />
+    <a href="/register" class="register-link">
+      Don't have an account? Register
+    </a>
+  </div>
+</div>
